@@ -29,6 +29,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String userId = oAuth2User.getName();
         String token = jwtProvider.create(userId);
 
-        response.sendRedirect("http://localhost:3000/auth/oauth-response?token=" + token);
+        // JSON 응답 문자열 생성
+        String tokenResponse = String.format("{\"token\": \"%s\"}", token);
+
+        // 응답 본문 작성
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(tokenResponse);
+        response.sendRedirect("http://localhost:3000/auth/oauth-response");
     }
 }
