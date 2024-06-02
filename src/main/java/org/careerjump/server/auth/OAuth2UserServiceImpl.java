@@ -26,12 +26,6 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(request);
         String oauthClientName = request.getClientRegistration().getClientName();
 
-        try {
-            System.out.println(new ObjectMapper().writeValueAsString(oAuth2User.getAttributes()));
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
         User user = null;
         String userId = null;
         String email = null;
