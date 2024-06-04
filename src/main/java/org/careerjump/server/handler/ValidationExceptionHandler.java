@@ -1,6 +1,6 @@
 package org.careerjump.server.handler;
 
-import org.careerjump.server.response.dto.ResponseDto;
+import org.careerjump.server.common.response.dto.ResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;

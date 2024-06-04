@@ -1,10 +1,10 @@
-package org.careerjump.server.response.dto;
+package org.careerjump.server.common.response.dto;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.careerjump.server.response.ResponseCode;
-import org.careerjump.server.response.ResponseMessage;
+import org.careerjump.server.common.response.ResponseCode;
+import org.careerjump.server.common.response.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

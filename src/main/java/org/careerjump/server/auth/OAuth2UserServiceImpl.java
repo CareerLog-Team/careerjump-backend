@@ -1,24 +1,24 @@
 package org.careerjump.server.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.careerjump.server.user.service.UserService;
 import org.careerjump.server.user.domain.CustomOAuth2User;
 import org.careerjump.server.user.domain.User;
-import org.careerjump.server.user.repository.UserRepository;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest request) throws OAuth2AuthenticationException {
@@ -44,10 +44,9 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
 
             user = new User(userId, email, "kakao", nickname, profileImageUrl);
 
-            userRepository.save(user);
+            userService.addUser(user);
         }
 
         return new CustomOAuth2User(userId);
     }
-
-}
+ }

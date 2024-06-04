@@ -51,7 +51,6 @@ public class JwtProvider {
             exception.printStackTrace();
             return null;
         }
-
         return subject;
     }
 

@@ -1,4 +1,4 @@
-package org.careerjump.server.response;
+package org.careerjump.server.common.response;
 
 public interface ResponseMessage {
 

@@ -6,8 +6,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.careerjump.server.user.service.UserService;
 import org.careerjump.server.user.domain.User;
-import org.careerjump.server.user.repository.UserRepository;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final JwtProvider jwtProvider;
 
     @Override
@@ -50,8 +50,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            User user = userRepository.findByUserId(userId);
-            String role = user.getRole(); // ROLE_USER, ROLE_ADMIN
+            User user = userService.getUserById(userId);
+            String role = user.getRole().name(); // ROLE_USER, ROLE_ADMIN
 
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(role));
