@@ -21,7 +21,7 @@ EXPOSE 8080
 
 # root 대신 nobody 권한으로 실행
 USER nobody
-ENTRYPOINT [
+ENTRYPOINT [                                     \
     "java",                                      \
     "-jar",                                      \
     "-Djava.security.egd=file:/dev/./urandom",   \
