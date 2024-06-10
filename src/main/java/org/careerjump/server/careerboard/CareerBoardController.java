@@ -1,6 +1,7 @@
 package org.careerjump.server.careerboard;
 
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.careerjump.server.careerboard.domain.Career;
 import org.careerjump.server.careerboard.domain.CareerBoard;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Timed("careerjump.careerboard")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/careerboard")
@@ -40,7 +42,7 @@ public class CareerBoardController {
     }
 
     @PostMapping("/add/education")
-    public void addCareer(@RequestBody AddEducationDto addEducationDto) {
+    public void addEducation(@RequestBody AddEducationDto addEducationDto) {
         CareerBoard careerBoard = getCareerBoard();
 
         List<EducationDto> educationDtos = addEducationDto.getEducationDtoList();

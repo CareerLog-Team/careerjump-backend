@@ -3,6 +3,7 @@ package org.careerjump.server.careerboard.domain;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import org.careerjump.server.common.entity.BaseTimeEntity;
 import org.careerjump.server.user.domain.User;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-public class CareerBoard {
+public class CareerBoard extends BaseTimeEntity {
 
     @Id
     @Column(name = "CAREER_BOARD_ID")
@@ -31,10 +32,13 @@ public class CareerBoard {
     )
     private List<Education> educationList = new ArrayList<>();
 
+    @Column(name = "SKILLS")
     private String skills;
+    @Column(name = "LINKS")
     private String links;
+    @Column(name = "STRENGTHS")
     private String strengths;
-
+    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;

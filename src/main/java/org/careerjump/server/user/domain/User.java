@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.careerjump.server.careerboard.domain.CareerBoard;
+import org.careerjump.server.common.entity.BaseTimeEntity;
 import org.careerjump.server.goal.domain.Goal;
 
 
@@ -16,7 +17,7 @@ import org.careerjump.server.goal.domain.Goal;
 @AllArgsConstructor
 @Entity(name = "USER")
 @Table(name = "USER_TABLE")
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @Column(name = "USER_ID")

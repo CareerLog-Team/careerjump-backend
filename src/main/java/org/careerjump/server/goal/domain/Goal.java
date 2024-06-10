@@ -2,6 +2,7 @@ package org.careerjump.server.goal.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.careerjump.server.common.entity.BaseTimeEntity;
 import org.careerjump.server.user.domain.User;
 
 @Entity
@@ -9,7 +10,7 @@ import org.careerjump.server.user.domain.User;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Goal {
+public class Goal extends BaseTimeEntity {
     @Id
     @Column(name = "GOAL_ID")
     @GeneratedValue(strategy = GenerationType.UUID)
