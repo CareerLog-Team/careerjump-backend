@@ -1,0 +1,21 @@
+#spring:
+#  config:
+#    activate:
+#      on-profile: local, dev
+#  application:
+#    name:
+#      careerjump
+spring:
+  config:
+    name:
+      swagger
+springdoc:
+  swagger-ui:
+    operationsSorter: method
+    disable-swagger-default-url: true
+    path: /swagger-ui.html
+    groups-order: DESC
+    display-request-duration: true
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  show-actuator: true

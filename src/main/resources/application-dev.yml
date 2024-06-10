@@ -1,0 +1,28 @@
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#  application:
+#    name:
+#      careerjump
+spring:
+  config:
+    name:
+      dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000 #최적화 옵션
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: careerlog
+    url: jdbc:mysql://careerlog-backend-db-prod.cdcywicqafe6.ap-northeast-2.rds.amazonaws.com:3306/careerjump_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    password: hW(N$jLFX(uZ1V%!
+
+
+jwt:
+  secret:
+    helloworldhelloworldhelloworldhelloworldhelloworldhelloworld

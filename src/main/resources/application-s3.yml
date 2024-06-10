@@ -1,0 +1,18 @@
+spring:
+  config:
+    name:
+      s3
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA5FTY6ITVP7AOO663
+      secretKey: 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
+    s3:
+      bucket:
+        careerlog-file-storage
+    region:
+      static:
+        ap-northeast-2
+    stack:
+      auto:
+        false

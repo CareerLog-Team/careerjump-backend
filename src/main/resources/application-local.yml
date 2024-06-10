@@ -1,0 +1,30 @@
+#spring:
+#  config:
+#    activate:
+#      on-profile: local
+#  application:
+#    name:
+#      careerjump
+spring:
+  config:
+    name:
+      local
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000 #최적화 옵션
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/careerjump_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    password: rlaeowjd1!
+
+
+# JWT 설정
+jwt:
+  secret:
+    helloworldhelloworldhelloworldhelloworldhelloworldhelloworld
