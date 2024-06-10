@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: dev
     group:
       local: local, swagger, oauth, s3, monitor
       dev: dev, swagger, oauth, s3, monitor
