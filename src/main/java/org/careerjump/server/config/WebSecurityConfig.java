@@ -10,7 +10,6 @@ import org.careerjump.server.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,16 +25,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @Configurable
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebMvcConfigurer {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final DefaultOAuth2UserService oAuth2UserService;
@@ -80,19 +79,35 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+//    @Bean
+//    protected CorsConfigurationSource corsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+//
+//        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000")); // 모든 출처에 대해서 허용
+//        corsConfiguration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE", "OPTIONS")); // 모든 메서드에 대해서 허용
+//        corsConfiguration.setAllowedHeaders(List.of("*")); // 모든 헤더에 대해서 허용
+//        corsConfiguration.setAllowCredentials(true); //
+//        corsConfiguration.setMaxAge(3600L);
+//
+//        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 패던과 모든 기준에 대해서 허용
+//        return source;
+//    }
+
+
     @Bean
-    protected CorsConfigurationSource corsConfigurationSource() {
+    public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        CorsConfiguration config = new CorsConfiguration();
 
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000")); // 모든 출처에 대해서 허용
-        corsConfiguration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE", "OPTIONS")); // 모든 메서드에 대해서 허용
-        corsConfiguration.setAllowedHeaders(List.of("*")); // 모든 헤더에 대해서 허용
-        corsConfiguration.setAllowCredentials(true); //
-        corsConfiguration.setMaxAge(3600L);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
 
-        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 패던과 모든 기준에 대해서 허용
-        return source;
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
     /* V1, V2 다른 기준을 적용하고 싶을 때 사용
