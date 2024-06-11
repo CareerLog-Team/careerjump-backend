@@ -14,6 +14,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
@@ -24,8 +25,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Configurable
 @Configuration
@@ -42,10 +46,7 @@ public class WebSecurityConfig {
         // csrf, cors
         http
                 .csrf(CsrfConfigurer::disable)
-                .cors(
-                        (cors) -> cors
-                        .configurationSource(corsConfigurationSource())
-                )
+                .cors(CorsConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
 
@@ -81,14 +82,14 @@ public class WebSecurityConfig {
 
     @Bean
     protected CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*"); // 모든 출처에 대해서 허용
-        corsConfiguration.addAllowedMethod("*"); // 모든 메서드에 대해서 허용
-        corsConfiguration.addAllowedHeader("*"); // 모든 헤더에 대해서 허용
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 패던과 모든 기준에 대해서 허용
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
 
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080")); // 모든 출처에 대해서 허용
+        corsConfiguration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE")); // 모든 메서드에 대해서 허용
+        corsConfiguration.setAllowedHeaders(List.of("*")); // 모든 헤더에 대해서 허용
+
+        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 패던과 모든 기준에 대해서 허용
         return source;
     }
 
