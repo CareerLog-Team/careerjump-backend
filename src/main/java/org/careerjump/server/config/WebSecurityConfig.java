@@ -88,6 +88,8 @@ public class WebSecurityConfig {
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000")); // 모든 출처에 대해서 허용
         corsConfiguration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE", "OPTIONS")); // 모든 메서드에 대해서 허용
         corsConfiguration.setAllowedHeaders(List.of("*")); // 모든 헤더에 대해서 허용
+        corsConfiguration.setAllowCredentials(true); //
+        corsConfiguration.setMaxAge(3600L);
 
         source.registerCorsConfiguration("/**", corsConfiguration); // 모든 패던과 모든 기준에 대해서 허용
         return source;
