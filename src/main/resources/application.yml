@@ -11,4 +11,5 @@ spring:
 logging:
   level:
     org.hibernate.sql: debug
-    org.careerjump.server.log: trace
+    org.careerjump.server: debug
+#    org.careerjump.server.log: trace
