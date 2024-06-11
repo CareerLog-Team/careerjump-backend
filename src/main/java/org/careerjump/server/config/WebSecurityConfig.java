@@ -85,7 +85,7 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080")); // 모든 출처에 대해서 허용
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000")); // 모든 출처에 대해서 허용
         corsConfiguration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE")); // 모든 메서드에 대해서 허용
         corsConfiguration.setAllowedHeaders(List.of("*")); // 모든 헤더에 대해서 허용
 
