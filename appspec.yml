@@ -1,0 +1,19 @@
+# AWS CodeDeploy Script
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/
+permission:
+  - object: /home/ec2-user/
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+
+hooks:
+  # 배포 후 custom 작업 정의
+  AfterInstall:
+    - location: ./scripts/docker_start.sh
+      timeout: 180
+      runas: root   # docker
