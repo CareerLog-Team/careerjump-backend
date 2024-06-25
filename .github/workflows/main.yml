@@ -102,5 +102,6 @@ jobs:
           --application-name careerjump-prod-code-deploy
           --deployment-group-name careerjump-prod-codedeploy-group
           --file-exists-behavior OVERWRITE
-          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip
-          --region $AWS_REGION
+          --s3-location bucket=careerjump-git-action-prod-s3,bundleType=zip,key=$GITHUB_SHA.zip
+          --region ap-northeast-2
+        shell: bash
