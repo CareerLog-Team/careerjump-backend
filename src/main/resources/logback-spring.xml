@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
+<configuration scan="true" scanPeriod="5 minutes" debug="false">
 
-    <!-- Appenders -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <property name="CONSOLE_LOG_FORMAT"
+              value="* %-20(%cyan(%date{HH:mm:ss.SSS}) [trace.id=%X{trace.id}] [%thread]) %highlight(%-5level) %magenta(%marker|%logger{36}): %msg%n%rEx"/>
+
+    <!-- console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <charset>UTF-8</charset>
-            <Pattern>%d %5p [%c] %m%n</Pattern>
+            <pattern>${CONSOLE_LOG_FORMAT}</pattern>
         </encoder>
     </appender>
 
-    <appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <charset>UTF-8</charset>
-            <Pattern>%d %5p %m%n</Pattern>
-        </encoder>
-    </appender>
 
-    <!-- Logger -->
-    <logger name="org.careerjump.server" level="DEBUG" appender-ref="console" />
-    <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
-    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
 
-    <!-- Root Logger -->
-    <root level="off">
-        <appender-ref ref="console" />
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>
