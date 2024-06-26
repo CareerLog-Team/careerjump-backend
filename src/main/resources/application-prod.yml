@@ -14,7 +14,9 @@ spring:
     username: careerlog
     url: jdbc:mysql://careerlog-backend-db-prod.cdcywicqafe6.ap-northeast-2.rds.amazonaws.com:3306/careerjump_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     password: hW(N$jLFX(uZ1V%!
-
+  output:
+    ansi:
+      enabled: never
 
 jwt:
   secret:
