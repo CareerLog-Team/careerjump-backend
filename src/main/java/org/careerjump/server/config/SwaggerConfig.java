@@ -26,8 +26,6 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI openAPI() {
-
-        /*
         SecurityScheme apiKey = new SecurityScheme()
                 .type(SecurityScheme.Type.HTTP)
                 .type(SecurityScheme.Type.APIKEY)
@@ -42,13 +40,6 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .components(new Components().addSecuritySchemes("Bearer Token", apiKey))
                 .addSecurityItem(securityRequirement)
-                .info(new Info()
-                        .title("CareerLog API")
-                        .version("v0")
-                        .description("커리어 로그의 서비스 API swagger-ui 화면 입니다."));
-         */
-
-        return new OpenAPI()
                 .info(new Info()
                         .title("CareerJump API")
                         .version("v0")
