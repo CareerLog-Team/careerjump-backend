@@ -21,10 +21,10 @@ class UserServiceTest {
     void 유저_생성테스트() {
         //given
         User user = UserUtils.getUser(
-                "hello@test.com",
+                "v4chelsea@test.com",
                 "kakao",
-                "hello",
-                "world",
+                "chelsea",
+                "chelsea",
                 "helloworld"
         );
 

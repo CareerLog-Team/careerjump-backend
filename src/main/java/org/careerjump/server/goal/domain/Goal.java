@@ -38,4 +38,15 @@ public class Goal extends BaseTimeEntity {
         this.industry = updateGoal.getIndustry();
         this.job = updateGoal.getJob();
     }
+
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "goalId='" + goalId + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", salary=" + salary +
+                ", industry='" + industry + '\'' +
+                ", job='" + job + '\'' +
+                '}';
+    }
 }

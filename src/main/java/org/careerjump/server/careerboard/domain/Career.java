@@ -42,4 +42,16 @@ public class Career extends BaseTimeEntity {
     @JoinColumn(name = "CAREER_BOARD_ID")
     private CareerBoard careerBoard;
 
+    @Override
+    public String toString() {
+        return "Career{" +
+                "careerId='" + careerId + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", job='" + job + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", description='" + description + '\'' +
+                ", isWorking=" + isWorking +
+                '}';
+    }
 }

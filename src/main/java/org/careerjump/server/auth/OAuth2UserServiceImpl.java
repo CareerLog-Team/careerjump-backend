@@ -1,6 +1,7 @@
 package org.careerjump.server.auth;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.careerjump.server.user.service.UserService;
 import org.careerjump.server.user.domain.CustomOAuth2User;
 import org.careerjump.server.user.domain.User;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -41,6 +43,13 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
             email = (String) kakao_account.get("email");
             nickname = (String) properties.get("nickname");
             profileImageUrl = (String) properties.get("profile_image");
+
+            log.info("새로운 사용자를 생성합니다.");
+            log.debug("""
+                    userId : {},
+                    email : {},
+                    nickname : {},
+                    profileImageUrl : {}""", userId, email, nickname, profileImageUrl);
 
             user = new User(userId, email, "kakao", nickname, profileImageUrl);
 

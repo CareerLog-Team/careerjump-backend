@@ -13,7 +13,8 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml  # 현재 디렉토리의 prometheus.yml 파일을 컨테이너의 /etc/prometheus/prometheus.yml 위치에 마운트
+      # 현재 디렉토리의 prometheus.yml 파일을 컨테이너의 /etc/prometheus/prometheus.yml 위치에 마운트
+      - ./src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
 

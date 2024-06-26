@@ -2,6 +2,7 @@ package org.careerjump.server.careerboard.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.careerjump.server.common.entity.BaseTimeEntity;
 import org.careerjump.server.user.domain.User;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class CareerBoard extends BaseTimeEntity {
 

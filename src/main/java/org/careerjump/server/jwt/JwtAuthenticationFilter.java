@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.careerjump.server.user.service.UserService;
 import org.careerjump.server.user.domain.User;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -61,8 +63,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(userId, null, authorities);
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             securityContext.setAuthentication(authenticationToken);
-
             SecurityContextHolder.setContext(securityContext);
+
+            log.debug("""
+                    userId : {},
+                    Roles : {}""", user.getUserId(), authorities);
+            log.debug("securityContext : {}",
+                    securityContext.getAuthentication());
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -73,20 +80,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String parseBearerToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-
+        log.debug("Authorization Token : {}", authorization);
 
         // 값이 존재하는지 확인
         boolean hasAuthorization = StringUtils.hasText(authorization);
-        if (!hasAuthorization) {
-            return null;
-        }
+        if (!hasAuthorization) return null;
 
         // Grant Type == Bearer 인지 확인
         boolean isBearer = authorization.startsWith("Bearer ");
-        if (!isBearer) {
-            return null;
-        }
+        if (!isBearer) return null;
 
-        return authorization.substring(7);
+        String returnAuthorization = authorization.substring(7);
+        log.debug("Return Authorization Token : {}", returnAuthorization);
+
+        return returnAuthorization;
     }
 }

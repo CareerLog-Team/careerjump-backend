@@ -3,6 +3,7 @@ package org.careerjump.server.careerboard;
 
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.careerjump.server.careerboard.domain.Career;
 import org.careerjump.server.careerboard.domain.CareerBoard;
 import org.careerjump.server.careerboard.domain.Education;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @Timed("careerjump.careerboard")
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +38,8 @@ public class CareerBoardController {
                 .map(CareerDto::toEntity)
                 .toList();
 
+        log.info("이력을 추가합니다. 추가 이력 개수 : {}", careers.size());
+
         for (Career career : careers) {
             careerBoardService.addCareer(careerBoard, career);
         }
@@ -50,6 +54,7 @@ public class CareerBoardController {
                 .map(EducationDto::toEntity)
                 .toList();
 
+        log.info("학력을 추가합니다. 추가 학력 개수 : {}", educations.size());
         for (Education education : educations) {
             careerBoardService.addEducation(careerBoard, education);
         }

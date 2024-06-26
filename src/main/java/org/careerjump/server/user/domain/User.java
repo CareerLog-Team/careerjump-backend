@@ -73,4 +73,16 @@ public class User extends BaseTimeEntity {
     public void updateCareerBoard(CareerBoard careerBoard) {
         this.careerBoard = careerBoard;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", type='" + type + '\'' +
+                ", role=" + role +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

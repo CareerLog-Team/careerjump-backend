@@ -27,4 +27,15 @@ public class Education extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAREER_BOARD_ID")
     private CareerBoard careerBoard;
+
+    @Override
+    public String toString() {
+        return "Education{" +
+                "educationId='" + educationId + '\'' +
+                ", educationName='" + educationName + '\'' +
+                ", major='" + major + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }
