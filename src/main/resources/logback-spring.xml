@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="5 minutes" debug="false">
 
     <property name="CONSOLE_LOG_FORMAT"
-              value="* %-20(%cyan(%date{HH:mm:ss.SSS}) [trace.id=%X{trace.id}] [%thread]) %highlight(%-5level) %magenta(%marker|%logger{36}): %msg%n%rEx"/>
+              value="* %-20(%date{HH:mm:ss.SSS} [trace.id=%X{trace.id}] [%thread]) %-5level %marker|%logger{36}: %msg%n%rEx"/>
 
     <!-- console -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
