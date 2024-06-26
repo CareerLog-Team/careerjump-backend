@@ -22,13 +22,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
-import java.util.List;
 
 @Configurable
 @Configuration
@@ -39,6 +37,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final DefaultOAuth2UserService oAuth2UserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
+
+    private final static String[] WHITE_LIST = {
+            "/domain/**", "/public/**", "/actuator", "/swagger-ui/**",
+            "/v3/api-docs/**", "/actuator/**", "/metrics/**",
+
+            "/", "/api/v1/auth/**", "/oauth2/**", "/manage/**", "/api/v1/log/**"
+    };
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -57,7 +63,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 )
                 .authorizeHttpRequests(
                         (request) -> request
-                                .requestMatchers("/", "/api/v1/auth/**", "/oauth2/**", "/manage/**", "/api/v1/log/**").permitAll()
+                                .requestMatchers(WHITE_LIST).permitAll()
                                 .requestMatchers("/api/v1/user/**").hasRole("USER")
                                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
@@ -100,7 +106,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setAllowCredentials(true);
