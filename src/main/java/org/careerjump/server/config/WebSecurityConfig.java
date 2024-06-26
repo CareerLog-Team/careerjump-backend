@@ -46,6 +46,18 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     };
 
 
+    private final static String[] USER_WHITE_LIST = {
+            "/api/v1/careerboard/**",
+            "/api/v1/goal/**",
+            "/api/v1/file/**"
+    };
+    private final static String[] ADMIN_WHITE_LIST = {
+            "/api/v1/careerboard/**",
+            "/api/v1/goal/**",
+            "/api/v1/file/**"
+    };
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // csrf, cors
@@ -64,8 +76,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests(
                         (request) -> request
                                 .requestMatchers(WHITE_LIST).permitAll()
-                                .requestMatchers("/api/v1/user/**").hasRole("USER")
-                                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(USER_WHITE_LIST).hasRole("USER")
+                                .requestMatchers(ADMIN_WHITE_LIST).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .oauth2Login(
