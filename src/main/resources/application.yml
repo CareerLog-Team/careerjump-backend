@@ -16,11 +16,8 @@ logging:
 #    org.careerjump.server.log: trace
 
 server:
-  servlet:
-    encoding:
-      force-response: 'true'
   ssl:
-    key-store: classpath:cert/keystore.p12
+    key-store: classpath:keystore.p12
     key-store-password: jigooin1234!
     key-store-type: PKCS12
   port: 8080
