@@ -96,7 +96,7 @@ jobs:
       - name: 🚀 Deploy to EC2 with CodeDeploy
         run: aws deploy create-deployment
           --application-name careerjump-prod-code-deploy
-          --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name careerjump-prod-codedeploy-group
+          --file-exists-behavior OVERWRITE
           --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=$GITHUB_SHA.zip
-        shell: bash
+          --region $AWS_REGION
